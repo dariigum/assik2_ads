@@ -6,11 +6,11 @@ public class MyQueue<T> {
     }
 
     public void enqueue(T item) {
-        queue.addElement(item);
+        queue.addElement(item);//add item to the end
     }
 
-    public T dequeue() {
-        if (isEmpty()) {
+    public T dequeue() {//remove/return item at the front
+        if (isEmpty()) {//first check
             throw new EmptyQueueException("Queue is empty");
         }
         T item = queue.getElement(0); // Get the element at the front of the queue

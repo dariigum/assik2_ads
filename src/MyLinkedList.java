@@ -1,33 +1,31 @@
-public class MyLinkedList<T> implements List<T>{
-    private Node<T> head;
-    private int size;
+public class MyLinkedList<T> implements List<T>{//generic type T, can hold any type of elements
+    private Node<T> head;//reference to the first node
+    private int size;//keeps size
 
-    public MyLinkedList(){
+    public MyLinkedList(){//constructor
         head = null;
         size = 0;
-    }
-    public Node<T> getHead() {
-        return head;
+        //ready to add elements as needed.
     }
 
     @Override
     public void addElement(T data) {
         Node<T> newNode = new Node<>(data);
         if (head == null) {
-            head = newNode;
+            head = newNode;//set head to new node
         }
         else {
             Node<T> currentNode = head;
             while (currentNode.next != null){
                 currentNode = currentNode.next;
             }
-            currentNode.next = newNode;
+            currentNode.next = newNode;//create new node
         }
         size++;
     }
 
-    public T getElement(int index) {
-        checkIndex(index);
+    public T getElement(int index) {//return element in a specific index
+        checkIndex(index);//check if index valid
         Node<T> currentNode = head;
         if (index == 0)
             return currentNode.data;
@@ -43,7 +41,7 @@ public class MyLinkedList<T> implements List<T>{
         return size;
     }
 
-    public void remove(int index) {
+    public void remove(int index) {//remove at the given index
         checkIndex(index);
         if(index == 0)
             head = head.next;

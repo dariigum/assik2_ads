@@ -10,12 +10,12 @@ public class MyArrayList<T> implements List<T>{
     @Override
     public void addElement(T data) {
         if (size >= arr.length) {
-            increaseBuffer();
+            increaseBuffer();//increase size before adding
         }
         arr[size++] = data;
     }
 
-    public void addElement(T element, int index) {
+    public void addElement(T element, int index) {//add element at a specific index
         if (size >= arr.length) {
             increaseBuffer();
         }
@@ -24,7 +24,7 @@ public class MyArrayList<T> implements List<T>{
     }
 
     private void increaseBuffer() {
-        T[] newArr = (T[]) new Object[arr.length * 2];
+        T[] newArr = (T[]) new Object[arr.length * 2];//increase size
         for (int i = 0; i < size; i++) {
             newArr[i] = arr[i];
         }
@@ -38,11 +38,11 @@ public class MyArrayList<T> implements List<T>{
 
     private void checkIndex(int index) {
         if (index < 0 || index >= size)
-            throw new IndexOutOfBoundsException("index not correct");
+            throw new IndexOutOfBoundsException("index not correct");//if index less that 0 or >=size
     }
 
     public int getSize() {
-        return size;
+        return size;//current size
     }
 
     public void printArr() {
@@ -61,7 +61,7 @@ public class MyArrayList<T> implements List<T>{
     }
 
     public void clear() {
-        arr = (T[]) new Object[5];
+        arr = (T[]) new Object[5];//default size of array
         size = 0;
     }
 
