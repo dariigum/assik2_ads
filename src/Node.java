@@ -1,6 +1,6 @@
-public class Node<T> {
-    T data;
-    Node next;
+public class Node<T> {//represent node in linked list
+    T data;//stores data in node
+    Node next;//reference to the next node
 
     public Node(T data) {
         this.data = data;
@@ -8,9 +8,9 @@ public class Node<T> {
     }
 
     public T getData() {
-        return data;
+        return data;//returns data stored in node
     }
     public T getNext() {
-        return data;
+        return data;//reference to the next node
     }
 }
