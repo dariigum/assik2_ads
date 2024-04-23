@@ -6,6 +6,9 @@ public class MyLinkedList<T> implements List<T>{
         head = null;
         size = 0;
     }
+    public Node<T> getHead() {
+        return head;
+    }
 
     @Override
     public void addElement(T data) {
