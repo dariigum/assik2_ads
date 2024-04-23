@@ -1,15 +1,26 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import java.util.ArrayList;
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        MyLinkedList myLinkedList = new MyLinkedList<>();
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
-        }
+        myLinkedList.addElement(1);
+        myLinkedList.addElement(2);
+        myLinkedList.addElement(3);
+        myLinkedList.addElement(4);
+        myLinkedList.addElement(5);
+
+        System.out.println("Value of index 3: " + myLinkedList.getElement(3));
+        System.out.println("Size of an list: " + myLinkedList.getSize());
+        System.out.println("Vaule of index 0 before remove: " + myLinkedList.getElement(0));
+        myLinkedList.remove(0);
+        System.out.println("Vaule of index 0 after remove: " + myLinkedList.getElement(0));
+        System.out.println("Size of an list: " + myLinkedList.getSize());
+        System.out.println("Vaule of index 2 before remove: " + myLinkedList.getElement(2));
+        myLinkedList.remove(2);
+        System.out.println("Vaule of index 2 after remove: " + myLinkedList.getElement(2));
+        System.out.println("Size of an list: " + myLinkedList.getSize());
+
     }
 }
