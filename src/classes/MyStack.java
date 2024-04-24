@@ -1,3 +1,5 @@
+package classes;
+
 public class MyStack<T> {
     private MyLinkedList<T> stack;//data structure for the stack
 

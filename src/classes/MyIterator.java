@@ -1,3 +1,5 @@
+package classes;
+
 public class MyIterator<T> {
     private Node<T> currentNode;//reference to the current node being iterated over
 

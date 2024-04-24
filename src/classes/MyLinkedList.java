@@ -1,3 +1,5 @@
+package classes;
+
 public class MyLinkedList<T> implements List<T>{//generic type T, can hold any type of elements
     private Node<T> head;//reference to the first node
     private int size;//keeps size
@@ -66,4 +68,7 @@ public class MyLinkedList<T> implements List<T>{//generic type T, can hold any t
     }
 
 
+    public Node<T> getHead() {
+        return null;
+    }
 }
