@@ -1,3 +1,5 @@
+import classes.MyLinkedList;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 package classes;
