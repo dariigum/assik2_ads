@@ -1,3 +1,9 @@
+import classes.DataType;
+
+import classes.NoSuchElementException;
+
+import classes.MyArrayList;
+
 public class MyMinHeap<T extends Comparable<T>> {
     private MyArrayList<T> heap;
 
@@ -19,7 +25,7 @@ public class MyMinHeap<T extends Comparable<T>> {
 
     public T deleteMin() {
         if (isEmpty()) {
-            throw new EmptyQueueException("Queue is empty");
+            throw new NoSuchElementException("Heap is empty");
         }
 
         T min = heap.getElement(0);
@@ -50,7 +56,7 @@ public class MyMinHeap<T extends Comparable<T>> {
 
     public T getMin() {
         if (isEmpty()) {
-            throw new EmptyQueueException("Queue is empty");
+            throw new NoSuchElementException("Heap is empty");
         }
         return heap.getElement(0);
     }
@@ -70,4 +76,15 @@ public class MyMinHeap<T extends Comparable<T>> {
     private int rightChild(int index) {
         return 2 * index + 2;
     }
+
+    private void heapifyAdd(T t, int index) {
+        int parent = index / 2;
+        if (MyArrayList.get(parent).compareTo(t) > 0) {
+            T temp = MyArrayList.get(parent);
+            MyArrayList.set(t, parent);
+            MyArrayList.set(temp, index);
+            heapifyAdd(t, parent);
+        }
+    }
 }
+

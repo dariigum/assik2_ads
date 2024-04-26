@@ -1,8 +1,10 @@
 package classes;
-//without sort()
+
+import java.util.Iterator;
 
 
-public class MyArrayList<T> implements List<T> {
+
+public class MyArrayList<T> implements MyList<T> {
     private int capacity = 10;
     private T[] arr;
     private int size;
@@ -31,8 +33,21 @@ public class MyArrayList<T> implements List<T> {
         if (size >= arr.length) {
             increaseBuffer();
         }
+        for (int i = size; i > index; i--) {
+            arr[i] = arr[i-1];
+        }
         checkIndex(index);
         arr[index] = element;
+    }
+
+    @Override
+    public void add(T element) {
+
+    }
+
+    @Override
+    public void add(T element, int index) {
+
     }
 
     @Override
@@ -45,12 +60,29 @@ public class MyArrayList<T> implements List<T> {
         addElement(element);
     }
 
+    @Override
+    public void set(T element, int index) {
+
+    }
+
+    @Override
+    public T get(int index) {
+        return null;
+    }
+
     private void increaseBuffer() {
         capacity = capacity * 2;
         T[] newArr = (T[]) new Object[capacity];
         for(int i = 0; i < size; i++) {
             newArr[i] = arr[i];
         }
+        arr = newArr;
+    }
+
+    private void decreaseBuffer() {
+        T[] newArr = (T[]) new Object[(capacity) (size / 2)];
+        for (int i = 0; i < size; i++)
+            newArr[i] = arr[i];
         arr = newArr;
     }
 
@@ -114,14 +146,8 @@ public class MyArrayList<T> implements List<T> {
 
     @Override
     public void sort() {
-        boolean swapped;
-        for (int i = 0; i < size - 1; i++) {
-            swapped = false;
-            for (int j = 0; j < size - i - 1; j++) {
-                if (arr[j] != null && arr[j + 1] != null && )
-            }
-        }
     }
+
 
     @Override
     public T[] toArray() {
@@ -147,6 +173,17 @@ public class MyArrayList<T> implements List<T> {
         return -1;
     }
 
+    @Override
+    public int lastIndexOf(T element) {
+        for (int i = size - 1; i >= 0; i--) {
+            if (arr[i].equals(element)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+
     public void clear() {
         size = 0;
     }
@@ -156,4 +193,20 @@ public class MyArrayList<T> implements List<T> {
         return size;
     }
 
+    @Override
+    public Iterator<T> iterator() {
+        return null;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        for(int i = 0; i < size; i++)
+            builder.append(arr[i]).append(" ");
+        return builder.toString();
+    }
+
+    public void swap(int index, int parent) {
+
+    }
 }

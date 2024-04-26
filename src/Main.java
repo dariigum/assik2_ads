@@ -1,29 +1,25 @@
-import classes.MyLinkedList;
+import classes.MyArrayList;
+import classes.MyList;
 
-import java.util.ArrayList;
-import java.util.Scanner;
-package classes;
+
+
 
 public class Main {
     public static void main(String[] args) {
-        MyLinkedList myLinkedList = new MyLinkedList<>();
+        MyArrayList MyArrayList = new MyArrayList<>();
 
-        myLinkedList.addElement(1);
-        myLinkedList.addElement(2);
-        myLinkedList.addElement(3);
-        myLinkedList.addElement(4);
-        myLinkedList.addElement(5);
+        MyArrayList.addElement(1, 2);
+        MyArrayList.addElement(2, 1);
+        MyArrayList.addElement(3, 4);
+        MyArrayList.addElement(4,4);
+        MyArrayList.addElement(5, 0);
 
-        System.out.println("Value of index 3: " + myLinkedList.getElement(3));
-        System.out.println("Size of an list: " + myLinkedList.getSize());
-        System.out.println("Vaule of index 0 before remove: " + myLinkedList.getElement(0));
-        myLinkedList.remove(0);
-        System.out.println("Vaule of index 0 after remove: " + myLinkedList.getElement(0));
-        System.out.println("Size of an list: " + myLinkedList.getSize());
-        System.out.println("Vaule of index 2 before remove: " + myLinkedList.getElement(2));
-        myLinkedList.remove(2);
-        System.out.println("Vaule of index 2 after remove: " + myLinkedList.getElement(2));
-        System.out.println("Size of an list: " + myLinkedList.getSize());
+        System.out.println(MyArrayList);
+
+        MyArrayList.remove(0);
+        System.out.println(MyArrayList);
+
+        System.out.println(MyArrayList.getElement(2));
 
     }
 }

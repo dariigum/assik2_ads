@@ -1,6 +1,6 @@
 package classes;
 
-public class MyQueue<T> {
+public class MyQueue<T extends Comparable<T>> implements DataType<T> {
     private MyLinkedList<T> queue;
 
     public MyQueue() {
@@ -23,5 +23,26 @@ public class MyQueue<T> {
     public boolean isEmpty() {
         return queue.getSize() == 0;
     }
+
+    public void push(T e) {
+        MyLinkedList.addFirst(t);
+    }
+
+    public T pop() {
+        T t = MyLinkedList.getLast();
+            MyLinkedList.removeLast();
+        return t;
+    }
+
+    public T get() {
+        return MyLinkedList.getLast();
+    }
+
+    public int size() {
+        return MyLinkedList.size();
+    }
 }
+
+
+
 
