@@ -1,15 +1,21 @@
 package classes;
 
+import java.lang.reflect.Array;
 import java.util.Iterator;
 
 
 
 public class MyArrayList<T> implements MyList<T> {
-    private int capacity = 10;
-    private T[] arr;
+    /**
+     * @param <T> implements the MyList interface.
+     *It provides methods to add, get, set, remove elements, checking index, clear and other.
+     */
+    private static final int DEFAULT_CAPACITY = 8;
+    private Object[] arr;
     private int size;
+
     public MyArrayList() {
-        arr = (T[]) new Object[capacity];
+        arr = new Object[DEFAULT_CAPACITY];
         size = 0;
     }
 
@@ -38,10 +44,30 @@ public class MyArrayList<T> implements MyList<T> {
         }
         checkIndex(index);
         arr[index] = element;
+        size++;
+    }
+    @Override
+    public void addElementAt(int index, T element) {
+        if (index < 0 || index > size) {
+            throw new IndexOutOfBoundsException("Index out of bounds");
+        }
+
+        if (size >= arr.length) {
+            increaseBuffer();
+        }
+
+        for (int i = size; i > index; i--) {
+            arr[i] = arr[i - 1];
+        }
+
+        arr[index] = element;
+        size++;
     }
 
+
+
     @Override
-    public void add(T element) {
+    public void add(int i, T element) {
 
     }
 
@@ -70,41 +96,47 @@ public class MyArrayList<T> implements MyList<T> {
         return null;
     }
 
+
+
     private void increaseBuffer() {
-        capacity = capacity * 2;
-        T[] newArr = (T[]) new Object[capacity];
-        for(int i = 0; i < size; i++) {
-            newArr[i] = arr[i];
-        }
+        int newCapacity = arr.length * 2;
+        Object[] newArr = new Object[newCapacity];
+        System.arraycopy(arr, 0, newArr, 0, size);
         arr = newArr;
     }
 
     private void decreaseBuffer() {
-        T[] newArr = (T[]) new Object[(capacity) (size / 2)];
-        for (int i = 0; i < size; i++)
-            newArr[i] = arr[i];
+        int newCapacity = arr.length / 2;
+        Object[] newArr = new Object[newCapacity];
+        System.arraycopy(arr, 0, newArr, 0, size);
         arr = newArr;
     }
 
     @Override
     public T getElement(int index) {
         checkIndex(index);
-        return arr[index];
+        return (T) arr[index];
     }
 
     @Override
     public T getFirst() {
-        if (size == 0)
+        if (size == 0) {
             System.out.println("List is empty");
-        return arr[0];
+            return null;
+        }
+        return (T) arr[0];
     }
+
 
     @Override
     public T getLast() {
-        if (size == 0)
+        if (size == 0) {
             System.out.println("List is empty");
-        return arr[size-1];
+            return null;
+        }
+        return (T) arr[size - 1];
     }
+
 
     private void checkIndex(int index) {
         if (index < 0 || index >= size)
@@ -144,19 +176,23 @@ public class MyArrayList<T> implements MyList<T> {
         remove(size-1);
     }
 
-    @Override
-    public void sort() {
-    }
+
+
+
+
+
+
 
 
     @Override
     public T[] toArray() {
-        T[] array = (T[]) new Object[size];
-        for (int i = 0; i < size; i++) {
-            array[i] = arr[i];
-        }
+        @SuppressWarnings("unchecked")
+        T[] array = (T[]) Array.newInstance(arr.getClass().getComponentType(), size);
+        System.arraycopy(arr, 0, array, 0, size);
         return array;
     }
+
+
 
     @Override
     public boolean exists(Object object) {
@@ -208,5 +244,9 @@ public class MyArrayList<T> implements MyList<T> {
 
     public void swap(int index, int parent) {
 
+    }
+
+    @Override
+    public void sort() {
     }
 }

@@ -1,6 +1,11 @@
 package classes;
 
 public class MyQueue<T extends Comparable<T>> implements DataType<T> {
+    /**
+     * The MyQueue class represents a queue data structure implemented using a linked list.
+     * It follows the FIFO (First In, First Out) principle, where elements are added at the end (rear) and removed from the front (front).
+     * it has methods: unqueue, dequeue, push, pop, get, size.
+     */
     private MyLinkedList<T> queue;
 
     public MyQueue() {
@@ -8,16 +13,16 @@ public class MyQueue<T extends Comparable<T>> implements DataType<T> {
     }
 
     public void enqueue(T item) {
-        queue.addElement(item);//add item to the end
+        queue.addElement(item);
     }
 
-    public T dequeue() {//remove/return item at the front
-        if (isEmpty()) {//first check
+    public T dequeue() {
+        if (isEmpty()) {
             throw new EmptyQueueException("Queue is empty");
         }
-        T item = queue.getElement(0); // Get the element at the front of the queue
-        queue.remove(0); // Remove the element from the front of the queue
-        return item; // Return the removed element
+        T item = queue.getElement(0);
+        queue.remove(0);
+        return item;
     }
 
     public boolean isEmpty() {
@@ -25,22 +30,31 @@ public class MyQueue<T extends Comparable<T>> implements DataType<T> {
     }
 
     public void push(T e) {
-        MyLinkedList.addFirst(t);
+        MyLinkedList<T> linkedList = new MyLinkedList<>();
+        linkedList.addFirst(e);
     }
 
+
+
     public T pop() {
-        T t = MyLinkedList.getLast();
-            MyLinkedList.removeLast();
+        MyLinkedList<T> linkedList = new MyLinkedList<>();
+        T t = linkedList.getLast();
+        linkedList.removeLast();
         return t;
     }
 
+
     public T get() {
-        return MyLinkedList.getLast();
+        MyLinkedList<T> linkedList = new MyLinkedList<>();
+        return linkedList.getLast();
     }
 
+
     public int size() {
-        return MyLinkedList.size();
+        MyLinkedList<T> linkedList = new MyLinkedList<>();
+        return linkedList.size();
     }
+
 }
 
 

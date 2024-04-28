@@ -5,11 +5,18 @@ import classes.NoSuchElementException;
 import classes.MyArrayList;
 
 public class MyMinHeap<T extends Comparable<T>> {
-    private MyArrayList<T> heap;
+    /**
+     * @param <T> provides a basic implementation of a min-heap data structure using a list
+     * insertion, retrieval, and deletion of elements
+     *bubble up/down, right/left child, heapify
+     */
+    private MyArrayList<T> heap, myArrayList;
 
     public MyMinHeap() {
         heap = new MyArrayList<>();
     }
+
+
 
     public void insert(T item) {
         heap.addElement(item);
@@ -79,12 +86,13 @@ public class MyMinHeap<T extends Comparable<T>> {
 
     private void heapifyAdd(T t, int index) {
         int parent = index / 2;
-        if (MyArrayList.get(parent).compareTo(t) > 0) {
-            T temp = MyArrayList.get(parent);
-            MyArrayList.set(t, parent);
-            MyArrayList.set(temp, index);
+        if (myArrayList.get(parent).compareTo(t) > 0) {
+            T temp = myArrayList.get(parent);
+            myArrayList.set(t, parent);
+            myArrayList.set(temp, index);
             heapifyAdd(t, parent);
         }
     }
+
 }
 

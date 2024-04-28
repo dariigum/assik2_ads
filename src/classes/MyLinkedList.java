@@ -1,29 +1,48 @@
+
 package classes;
 
 import java.util.Iterator;
 
-public class MyLinkedList<T>  implements MyList<T> {//generic type T, can hold any type of elements
-    private Node<T> head;//reference to the first node
-    private int size=0;//keeps size
+public class MyLinkedList<T extends Comparable<T>> implements MyList<T> {
+    /**
+     * This class implements a linked list data structure.
+     * @param <T> provides a basic implementation of a singly linked list,
+     * supporting various operations commonly associated with lists.
+     * It provides methods to add, get, set, remove elements, getting index, sort.
+     */
+    private Node<T> head;
+    private int size;
 
-    public MyLinkedList(){//constructor
+    public MyLinkedList() {
         head = null;
         size = 0;
-        //ready to add elements as needed.
     }
 
     @Override
     public void addElement(T data) {
         Node<T> newNode = new Node<>(data);
         if (head == null) {
-            head = newNode;//set head to new node
-        }
-        else {
+            head = newNode;
+        } else {
             Node<T> currentNode = head;
-            while (currentNode.next != null){
+            while (currentNode.next != null) {
                 currentNode = currentNode.next;
             }
-            currentNode.next = newNode;//create new node
+            currentNode.next = newNode;
+        }
+        size++;
+    }
+
+    @Override
+    public void addElementAt(int index, T element) {
+        if (index < 0 || index > size) {
+            throw new IndexOutOfBoundsException("Invalid index");
+        }
+        if (index == 0) {
+            head = new Node<>(element, head);
+        } else {
+            Node<T> prev = getNodeAt(index - 1);
+            prev.next = new Node<>(element, prev.next);
         }
         size++;
     }
@@ -40,18 +59,19 @@ public class MyLinkedList<T>  implements MyList<T> {//generic type T, can hold a
         node.next = new Node<>(element, node.next);
     }
 
+
     @Override
-    public T getElement(int index) {//return element in a specific index
-        checkIndex(index);//check if index valid
+    public T getElement(int index) {
+        checkIndex(index);
         Node<T> currentNode = head;
         if (index == 0)
-            return currentNode.data;
+            return currentNode.element;
         else {
             for (int i = 0; i < index; i++) {
                 currentNode = currentNode.next;
             }
         }
-        return currentNode.data;
+        return currentNode.element;
     }
 
     @Override
@@ -64,7 +84,7 @@ public class MyLinkedList<T>  implements MyList<T> {//generic type T, can hold a
 
     @Override
     public T get(int index) {
-        return getNodeAt(index + 1).item;
+        return getNodeAt(index + 1).element;
     }
 
     @Override
@@ -74,7 +94,12 @@ public class MyLinkedList<T>  implements MyList<T> {//generic type T, can hold a
 
     @Override
     public T getLast() {
-        return getLastNode().item;
+        return (T) getLastNode();
+    }
+
+    private Object getLastNode() {
+
+        return null;
     }
 
     @Override
@@ -114,16 +139,26 @@ public class MyLinkedList<T>  implements MyList<T> {//generic type T, can hold a
             node = head;
 
             while (node.next != null) {
-                if (node.element.compareTo(node.next.element) > 0) {
-                    T t = node.next.element;
-                    node.next.element = node.element;
-                    node.element = t;
-                    swapped = true;
+                if (node.element != null && node.next.element != null) {
+                    if (node.element instanceof Comparable && node.next.element instanceof Comparable) {
+                        Comparable<T> current = (Comparable<T>) node.element;
+                        Comparable<T> next = (Comparable<T>) node.next.element;
+                        if (current.compareTo((T) node.next.element) > 0) {
+                            T temp = node.element;
+                            node.element = (T)node.next.element;
+                            node.next.element = temp;
+                            swapped = true;
+                        }
+                    } else {
+                        throw new IllegalArgumentException("Elements are not comparable");
+                    }
                 }
                 node = node.next;
             }
         } while (swapped);
     }
+
+
 
     @Override
     public int indexOf(T item) {
@@ -168,8 +203,6 @@ public class MyLinkedList<T>  implements MyList<T> {//generic type T, can hold a
         return size;
     }
 
-
-
     private void checkIndex(int index) {
         if (index < 0 || index >= size)
             throw new IndexOutOfBoundsException("index not correct");
@@ -180,18 +213,9 @@ public class MyLinkedList<T>  implements MyList<T> {//generic type T, can hold a
         size = 0;
     }
 
-
-    @Override
-    public String toString() {
-        StringBuilder str = new StringBuilder();
-        Node<T> h = head;
-        while (h != null) {
-            str.append(h.item).append(" ");
-            h = h.next;
-        }
-        return str.toString();
+    public Node<T> getHead() {
+        return head;
     }
-
     @Override
     public Iterator<T> iterator() {
         return new Itr();
@@ -199,55 +223,74 @@ public class MyLinkedList<T>  implements MyList<T> {//generic type T, can hold a
 
 
     private class Itr implements Iterator<T> {
-        Node<T> front;
-
-        public Itr() {
-            front = head;
-        }
-
         @Override
         public boolean hasNext() {
-            return front != null;
+            return false;
         }
 
         @Override
         public T next() {
-            Node<T> node = front;
-            front = front.next;
-            return node.element;
-        }
-    }
-
-    private static class Node<T> {
-        public T element;
-        T data;
-        Node<T> next;
-
-        public Node(T item) {
-            this.element = element;
-            next = null;
-        }
-
-        public Node(T item, Node<T> next) {
-            this.element = element;
-            this.next = next;
-        }
-    }
-
-    private Node<T> getNodeAt(int index) {
-        checkIndex(index);
-        Node<T> node = head;
-        if (node == null)
             return null;
-        while (--index != 0 && node.next != null)
-            node = node.next;
+        }
+    }
+
+    @Override
+    public int size() {
+        return size;
+    }
+
+    @Override
+    public void addLast(T element) {
+        addElement(element);
+    }
+    @Override
+    public void addFirst(T element) {
+        add(0, element);
+    }
+
+
+    @Override
+    public void add(int index, T element) {
+        if (index < 0 || index > size) {
+            throw new IndexOutOfBoundsException("Invalid index: " + index);
+        }
+        if (index == 0) {
+            addFirst(element);
+        } else {
+            Node<T> prevNode = getNodeAt(index - 1);
+            Node<T> newNode = new Node<>(element, prevNode.next);
+            prevNode.next = newNode;
+            size++;
+        }
+    }
+
+    private Node<T> getNodeAt(int i) {
+        Node<T> node = head;
         return node;
     }
 
-    private Node<T> getLastNode() {
-        Node<T> node = head;
-        while (node.next != null)
-            node = node.next;
-        return node;
+    @Override
+    public void addElement(int index, T element) {
+        if (index < 0 || index > size) {
+            throw new IndexOutOfBoundsException("Invalid index: " + index);
+        }
+
+        if (index == 0) {
+            head = new Node<>(element, head);
+        } else {
+            Node<T> prev = getNodeAt(index - 1);
+            prev.next = new Node<>(element, prev.next);
+        }
+        size++;
     }
+
+    @Override
+    public void setElement(int index, T element) {
+        checkIndex(index);
+
+        Node<T> node = getNodeAt(index);
+        node.element = element;
+    }
+
+
 }

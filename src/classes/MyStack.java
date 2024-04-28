@@ -1,30 +1,34 @@
 package classes;
 
-public class MyStack<T> {
-    private MyLinkedList<T> stack;//data structure for the stack
+public class MyStack<T extends Comparable<T>> {
+    /**
+     * The MyStack class represents a stack data structure implemented using a linked list.
+     * It has methods: peek, pop, push.
+     */
+    private MyLinkedList<T> stack;
 
     public MyStack() {
         stack = new MyLinkedList<>();
     }
 
-    public void push(T item) {//add item to the top
+    public void push(T item) {
         stack.addElement(item);
     }
 
-    public T pop() {//remove and return at the top
-        if (isEmpty()) {//first checks if it's empty
-            throw new IllegalStateException("Stack is empty");
-        }
-        T item = stack.getElement(0); //retrieves the item
-        stack.remove(0);//removes it from the stack
-        return item;//returns the removed item.
-    }
-
-    public T peek() {//returns the item at the top of the stack without removing it.
+    public T pop() {
         if (isEmpty()) {
             throw new IllegalStateException("Stack is empty");
         }
-        return stack.getElement(0);//retrieves item at the top of the stack and returns it.
+        T item = stack.getElement(0);
+        stack.remove(0);
+        return item;
+    }
+
+    public T peek() {
+        if (isEmpty()) {
+            throw new IllegalStateException("Stack is empty");
+        }
+        return stack.getElement(0);
     }
 
     public boolean isEmpty() {

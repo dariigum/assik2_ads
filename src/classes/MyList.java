@@ -4,11 +4,17 @@ import java.util.Iterator;
 
 
 public interface MyList<T> {
+    /**
+     * The MyList interface serves as a blueprint for classes responsible for managing collections of elements.
+     */
     void addElement(T data);
 
     void setElement(int index, T element);
 
-    void add(T element);
+    void addElement(int index, T element);
+    void addElementAt(int index, T element);
+    T getElement(int index);
+    void add(int i, T element);
     void add(T element, int index);
     void addFirst(T element);
     void addLast(T element);

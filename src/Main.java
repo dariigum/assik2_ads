@@ -1,25 +1,28 @@
-import classes.MyArrayList;
+
 import classes.MyList;
-
-
-
+import classes.MyArrayList;
 
 public class Main {
+    /**
+     * The main method is the entry point of the program.
+     * adding elements to the list, removing elements, getting elements, and retrieving elements by index..
+     */
     public static void main(String[] args) {
-        MyArrayList MyArrayList = new MyArrayList<>();
+        MyArrayList<Integer> myArrayList = new MyArrayList<>();
 
-        MyArrayList.addElement(1, 2);
-        MyArrayList.addElement(2, 1);
-        MyArrayList.addElement(3, 4);
-        MyArrayList.addElement(4,4);
-        MyArrayList.addElement(5, 0);
+        myArrayList.add(0, Integer.valueOf(2));
+        myArrayList.add(Integer.valueOf(1), 1);
+        myArrayList.add(Integer.valueOf(2), 4);
+        myArrayList.add(Integer.valueOf(3), 4);
+        myArrayList.add(0, Integer.valueOf(5));
 
-        System.out.println(MyArrayList);
+        System.out.println(myArrayList);
 
-        MyArrayList.remove(0);
-        System.out.println(MyArrayList);
+        myArrayList.remove(1);
+        System.out.println(myArrayList);
 
-        System.out.println(MyArrayList.getElement(2));
-
+        System.out.println(myArrayList.getElement(2));
     }
 }
+
+

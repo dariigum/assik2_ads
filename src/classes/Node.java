@@ -1,19 +1,27 @@
 package classes;
 
 public class Node<T> {
-    public T element;//represent node in linked list
-    T data;//stores data in node
-    Node next;//reference to the next node
+    /**
+     * The Node class represents a single node in a linked list.
+     * Each node contains a data element and a reference to the next node in the list.
+     */
+    public T element;
+    T data;
+    Node next;
 
     public Node(T data) {
         this.data = data;
         next = null;
     }
 
+    public <T> Node(T element, Node<T> head) {
+
+    }
+
     public T getData() {
-        return data;//returns data stored in node
+        return data;
     }
     public T getNext() {
-        return data;//reference to the next node
+        return data;
     }
 }
